@@ -84,4 +84,4 @@ ENV/
 # Spyder project settings
 .spyderproject
 
-*.swp
+*.sw[po]
