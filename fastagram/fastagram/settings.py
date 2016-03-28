@@ -38,12 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'djnago-extension',
-    'debugg-toolbar',
+    'django_extensions',
+    'debug_toolbar',
 
     'users',
     'fastagram',
-
 ]
 
 MIDDLEWARE_CLASSES = [
