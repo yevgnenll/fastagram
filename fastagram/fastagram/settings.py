@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'users',
     'fastagram',
+    'posts',
 ]
 
 MIDDLEWARE_CLASSES = [

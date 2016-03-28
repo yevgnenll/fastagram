@@ -13,7 +13,7 @@ class Post(models.Model):
     )
 
     created_at = models.DateTimeField(
-        auto_add_now=True,
+        auto_now_add=True,
     )
 
     updated_at = models.DateTimeField(
