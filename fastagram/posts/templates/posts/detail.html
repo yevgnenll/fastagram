@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ post.title }}
+{% endblock %}
+
+{% block content %}
+  {{ post.user.username }}
+
+  {{ post.created_at }}
+  {{ post.updated_at }}
+
+  <img src="{{ post.image }}" alt="">
+
+{% endblock %}
