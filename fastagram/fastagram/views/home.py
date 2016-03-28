@@ -1,6 +1,6 @@
-from django.views.generic import View
+from django.views.generic import TemplateView
 
 
-class HomePage(View):
+class HomePage(TemplateView):
 
     template_name = "home.html"
