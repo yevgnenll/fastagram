@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.core.urlresolvers import reverse
 
 from users.models import User
 
@@ -37,3 +38,12 @@ class Post(models.Model):
         from fastagram.utils import make_hash
         self.hash_id = make_hash(self)
         self.save()
+
+    def get_absolute_url(self):
+
+        # redirect detailpage where i wrote
+        return reverse(
+            'post', kwargs={
+                'pk': self.pk
+             }
+        )
