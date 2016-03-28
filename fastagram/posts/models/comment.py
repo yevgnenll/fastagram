@@ -1,12 +1,12 @@
 from django.db import models
 
-from users.models import User
+from django.conf import settings
 
 
 class Comment(models.Model):
 
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
     )
 
     post = models.ForeignKey(
@@ -16,3 +16,5 @@ class Comment(models.Model):
     created_at = models.DateTimeField(
         auto_now_add=True,
     )
+
+    content = models.TextField()
