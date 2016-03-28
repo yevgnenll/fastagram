@@ -1,7 +1,7 @@
 from django.contrib.auth import login, authenticate
 from django.views.generic import View
 from django.core.urlresolvers import reverse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from users.models import User
 
@@ -14,7 +14,7 @@ class LoginView(View):
         return render(
             request,
             "users/login.html",
-            context
+            context,
         )
 
     def post(self, request):
@@ -29,4 +29,10 @@ class LoginView(View):
 
         if is_user:
             login(request, is_user)
-            return reverse("home")
+            return redirect(reverse("home"))
+
+        return render(
+            request,
+            "home.html",
+            {}
+        )
