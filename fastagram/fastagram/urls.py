@@ -18,11 +18,16 @@ from django.contrib import admin
 
 from users.views import LoginView
 from fastagram.views import HomePage
+from posts.views import PostListView, PostDetailView
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     url(r'^$', HomePage.as_view(), name="home"),
-    url(r'^login/', LoginView.as_view(), name="login"),
+    url(r'^login/$', LoginView.as_view(), name="login"),
+    url(r'^posts/$', PostListView.as_view(), name="post_list"),
+    url(r'^posts/(?P<pk>\d+)/$', PostDetailView.as_view(), name="post"),
+
 
 ]
