@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.views.generic import View
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
@@ -18,4 +18,15 @@ class LoginView(View):
         )
 
     def post(self, request):
-        pass
+
+        username = request.POST.get('username')
+        user_pw = request.POST.get('password')
+
+        is_user = authenticate(
+           username=username,
+           password=user_pw,
+        )
+
+        if is_user:
+            login(request, is_user)
+            return reverse("home")
