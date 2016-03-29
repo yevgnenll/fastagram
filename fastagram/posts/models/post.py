@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 
 from users.models import User
+from tags.models import Tag
 
 
 class Post(models.Model):
@@ -31,6 +32,12 @@ class Post(models.Model):
         null=True,
         blank=True,
         unique=True,
+    )
+
+    tags = models.ManyToManyField(
+        Tag,
+        null=True,
+        blank=True,
     )
 
     def make_hash_id(self):
