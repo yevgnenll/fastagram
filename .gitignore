@@ -85,4 +85,3 @@ ENV/
 .spyderproject
 
 *.sw[po]
-dist/
