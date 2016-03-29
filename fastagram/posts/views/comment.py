@@ -1,9 +1,12 @@
 from posts.models import Comment, Post
 
 from django.views.generic.edit import CreateView
+from django.views.decorators.http import require_POST
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
 
 
+@method_decorator(require_POST, name="dispatch")
 class AddCommentView(LoginRequiredMixin, CreateView):
 
     model = Comment
