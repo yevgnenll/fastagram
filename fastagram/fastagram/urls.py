@@ -31,9 +31,9 @@ urlpatterns = [
     url(r'^$', HomePage.as_view(), name="home"),
     url(r'^login/$', LoginView.as_view(), name="login"),
     url(r'^posts/$', PostListView.as_view(), name="post_list"),
-    url(r'^posts/(?P<pk>\d+)/$', PostDetailView.as_view(), name="post"),
+    url(r'^posts/(?P<slug>\w+)/$', PostDetailView.as_view(), name="post"),
     url(r'^posts/write/$', WritePostView.as_view(), name="write"),
-    url(r'^posts/(?P<pk>\d+)/comment/$', AddCommentView.as_view(), name="comment"),
+    url(r'^posts/(?P<slug>\w+)/comment/$', AddCommentView.as_view(), name="comment"),
     url(r'^signup/$', AuthSignupView.as_view(), name="signup"),
     url(r'^logout/$', logout_user, name="logout"),
 

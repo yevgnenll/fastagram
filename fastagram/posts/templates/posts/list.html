@@ -9,7 +9,7 @@
 <h1>post list</h1>
   <ul>
   {% for post in object_list %}
-    <li><a href="{% url 'post' post.id %}">{{ post.content }}</a></li>
+    <li><a href="{% url 'post' post.hash_id %}">{{ post.content }}</a></li>
   {% endfor %}
   </ul>
 

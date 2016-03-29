@@ -23,6 +23,6 @@ class Comment(models.Model):
 
         return reverse(
             'post', kwargs={
-                'pk': self.post.id,
+                'slug': self.post.hash_id,
             }
         )

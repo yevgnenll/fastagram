@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class AddCommentView(LoginRequiredMixin, CreateView):
 
     model = Comment
+    slug_field = 'hash_id'
     fields = [
         'content',
     ]
@@ -15,6 +16,6 @@ class AddCommentView(LoginRequiredMixin, CreateView):
 
         form.instance.user = self.request.user
         form.instance.post = Post.objects.get(
-            pk=self.kwargs.get('pk')
+            hash_id=self.kwargs.get('slug'),
         )
         return super(AddCommentView, self).form_valid(form)
