@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ post.title }}
+{% endblock %}
+
+{% block content %}
+  {{ post.user.username }}
+
+  {{ post.created_at }}
+  {{ post.updated_at }}
+
+  <img src="/media/{{ post.image }}" alt="">
+
+  <form action="{% url 'comment' post.id %}" method="post">
+    <input type="text" name="content">
+    <input type="submit" value="submit">
+    {% csrf_token %}
+  </form>
+    
+  
+  <ul>
+    {% for comment in post.comment_set.all %}
+    <li>{{ comment.content }}</li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
