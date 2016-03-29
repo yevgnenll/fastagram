@@ -16,9 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from users.views import LoginView
+from users.views import LoginView, UserProfileView
 from fastagram.views import HomePage
 from posts.views import PostListView, PostDetailView, WritePostView, AddCommentView
+from users.views import AuthSignupView, logout_user
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -33,6 +34,9 @@ urlpatterns = [
     url(r'^posts/(?P<pk>\d+)/$', PostDetailView.as_view(), name="post"),
     url(r'^posts/write/$', WritePostView.as_view(), name="write"),
     url(r'^posts/(?P<pk>\d+)/comment/$', AddCommentView.as_view(), name="comment"),
+    url(r'^signup/$', AuthSignupView.as_view(), name="signup"),
+    url(r'^logout/$', logout_user, name="logout"),
 
+    url(r'^(?P<slug>\w+)/$', UserProfileView.as_view(), name="profile"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
