@@ -7,3 +7,4 @@ class PostDetailView(DetailView):
 
     model = Post
     template_name = "posts/detail.html"
+    slug_field = 'hash_id'

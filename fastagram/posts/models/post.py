@@ -44,6 +44,6 @@ class Post(models.Model):
         # redirect detailpage where i wrote
         return reverse(
             'post', kwargs={
-                'pk': self.pk
+                'slug': self.hash_id
              }
         )
