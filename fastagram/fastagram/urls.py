@@ -18,7 +18,7 @@ from django.contrib import admin
 
 from users.views import LoginView
 from fastagram.views import HomePage
-from posts.views import PostListView, PostDetailView, WritePostView
+from posts.views import PostListView, PostDetailView, WritePostView, AddCommentView
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -32,5 +32,7 @@ urlpatterns = [
     url(r'^posts/$', PostListView.as_view(), name="post_list"),
     url(r'^posts/(?P<pk>\d+)/$', PostDetailView.as_view(), name="post"),
     url(r'^posts/write/$', WritePostView.as_view(), name="write"),
+    url(r'^posts/(?P<pk>\d+)/comment/$', AddCommentView.as_view(), name="comment"),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
