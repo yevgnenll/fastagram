@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+  user.username
+{% endblock %}
+
+{% block content %}
+
+  <ul>
+    <li>{{ user.username }}</li>
+    <li>{{ user.description }}</li>
+  </ul>
+
+{% endblock %}
