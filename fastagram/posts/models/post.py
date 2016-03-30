@@ -34,11 +34,35 @@ class Post(models.Model):
         unique=True,
     )
 
-    tags = models.ManyToManyField(
+    tag_set = models.ManyToManyField(
         Tag,
         null=True,
         blank=True,
     )
+
+    @property
+    def tags_to_href(self):
+
+        with_sharp = [
+            word
+            for word
+            in self.content.split(' ')
+            if word.startswith('#')
+        ]
+
+        result_content = []
+
+        content_splite = self.content.split(' ')
+
+        for word in content_splite:
+            if word in [tag for tag in with_sharp]:
+                word = "<a href='{tag_url}'>{tag_name}</a>".format(
+                    tag_url=Tag.objects.get(name=word.replace('#', '')).get_absolute_url(),
+                    tag_name=word,
+                )
+            result_content.append(word)
+
+        return " ".join(result_content)
 
     def make_hash_id(self):
 
