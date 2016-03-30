@@ -18,7 +18,7 @@ from django.contrib import admin
 
 from users.views import LoginView, UserProfileView
 from fastagram.views import HomePage
-from posts.views import PostListView, PostDetailView, WritePostView, AddCommentView
+from posts.views import PostListView, PostDetailView, WritePostView, AddCommentView, TagCreateView, TagPostDetailView
 from users.views import AuthSignupView, logout_user
 
 from django.conf import settings
@@ -31,12 +31,13 @@ urlpatterns = [
     url(r'^$', HomePage.as_view(), name="home"),
     url(r'^login/$', LoginView.as_view(), name="login"),
     url(r'^posts/$', PostListView.as_view(), name="post_list"),
-    url(r'^posts/(?P<slug>\w+)/$', PostDetailView.as_view(), name="post"),
     url(r'^posts/write/$', WritePostView.as_view(), name="write"),
+    url(r'^tags/(?P<slug>\w+)/$', TagPostDetailView.as_view(), name="tag-detail"),
+    url(r'^posts/(?P<slug>\w+)/tags/$', TagCreateView.as_view(), name="tag-create"),
     url(r'^posts/(?P<slug>\w+)/comment/$', AddCommentView.as_view(), name="comment"),
+    url(r'^posts/(?P<slug>\w+)/$', PostDetailView.as_view(), name="post"),
     url(r'^signup/$', AuthSignupView.as_view(), name="signup"),
     url(r'^logout/$', logout_user, name="logout"),
-
     url(r'^(?P<slug>\w+)/$', UserProfileView.as_view(), name="profile"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

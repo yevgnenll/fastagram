@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 class Tag(models.Model):
@@ -18,5 +19,21 @@ class Tag(models.Model):
         auto_now=True,
     )
 
+    @property
+    def tag_name(self):
+
+        return "#{tag_name}".format(
+            tag_name=self.name,
+        )
+
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+
+        return reverse(
+            'tag-detail',
+            kwargs={
+                'slug': self.name
+            }
+        )
