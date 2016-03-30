@@ -10,5 +10,12 @@ class User(AbstractUser):
 
     description = models.TextField()
 
+    follower_set = models.ManyToManyField(
+        "self",
+        related_name="followee_set",
+        symmetrical=False,
+        through="Follow",
+    )
+
     def __str__(self):
         return self.username
