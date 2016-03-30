@@ -7,18 +7,20 @@
 {% block content %}
 
 <h1>post list</h1>
-  <ul>
-  {% for post in object_list %}
-    <li><img src="{{ post.image.url }}" width=200 height=200  alt=""></li>
-    <li><a href="{% url 'post' post.hash_id %}">{{ post.content }}</a></li>
-  {% endfor %}
-  </ul>
+    <ul>
+    {% for post in object_list %}
+    {% if post.image %}
+        <li><img src="{{ post.image.url }}" width=200 height=200  alt=""></li>
+    {% endif %}
+        <li><a href="{% url 'post' post.hash_id %}">{{ post.content }}</a></li>
+    {% endfor %}
+    </ul>
 
-  <form action="{% url 'write' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <li><textarea name="content" cols="30" rows="10"></textarea></li>
-    <li><input type="file" name="image" required></li>
-    <li><input type="submit"></li>
-  </form>
+    <form action="{% url 'write' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <li><textarea name="content" cols="30" rows="10"></textarea></li>
+        <li><input type="file" name="image" required></li>
+        <li><input type="submit"></li>
+    </form>
 
 {% endblock %}
