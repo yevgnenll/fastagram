@@ -9,15 +9,16 @@
 <h1>post list</h1>
   <ul>
   {% for post in object_list %}
+    <li><img src="{{ post.image.url }}" width=200 height=200  alt=""></li>
     <li><a href="{% url 'post' post.hash_id %}">{{ post.content }}</a></li>
   {% endfor %}
   </ul>
 
   <form action="{% url 'write' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <textarea name="content" cols="30" rows="10"></textarea>
-    <input type="file" name="image">
-    <input type="submit">
+    <li><textarea name="content" cols="30" rows="10"></textarea></li>
+    <li><input type="file" name="image" required></li>
+    <li><input type="submit"></li>
   </form>
 
 {% endblock %}

@@ -40,6 +40,12 @@ class Post(models.Model):
         blank=True,
     )
 
+    like_user_set = models.ManyToManyField(
+        User,
+        related_name='like_user_set',
+        through='Like',
+    )
+
     @property
     def tags_to_href(self):
 
