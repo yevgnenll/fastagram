@@ -5,6 +5,8 @@ from django.core.urlresolvers import reverse
 from users.models import User
 from tags.models import Tag
 
+from posts.utils import find_tags, wrrap_link_node
+
 
 class Post(models.Model):
 
@@ -40,29 +42,20 @@ class Post(models.Model):
         blank=True,
     )
 
+    like_user_set = models.ManyToManyField(
+        User,
+        related_name='like_user_set',
+        through='Like',
+    )
+
+    class Meta:
+        verbose_name = "포스트"
+        verbose_name_plural = verbose_name
+
     @property
     def tags_to_href(self):
-
-        with_sharp = [
-            word
-            for word
-            in self.content.split(' ')
-            if word.startswith('#')
-        ]
-
-        result_content = []
-
-        content_splite = self.content.split(' ')
-
-        for word in content_splite:
-            if word in [tag for tag in with_sharp]:
-                word = "<a href='{tag_url}'>{tag_name}</a>".format(
-                    tag_url=Tag.objects.get(name=word.replace('#', '')).get_absolute_url(),
-                    tag_name=word,
-                )
-            result_content.append(word)
-
-        return " ".join(result_content)
+        ret_val = wrrap_link_node(self.content)
+        return ret_val
 
     def make_hash_id(self):
 

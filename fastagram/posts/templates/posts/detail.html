@@ -12,8 +12,10 @@
     <p>{{ post.tags_to_href | safe }}</p>
     <p>{{ post.created_at }}</p>
     <p>{{ post.updated_at }}</p>
+    {% if post.image %}
+       <img src="{{ post.image.url }}" width=200 height=200  alt="">>
+    {% endif %}
 
-    <img src="{{ post.image.url }}" alt="">
 
   <h1>tags</h1>
   {% for tag in post.tag_set.all %}
