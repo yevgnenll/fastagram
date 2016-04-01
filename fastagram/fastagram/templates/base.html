@@ -1,10 +1,10 @@
-{% load staticfiles %}
+{% load pipeline %}
 <!DOCTYPE html>
 <html lang="ko-KR">
 <head>
   <meta charset="UTF-8">
   <title>{% block title %} {% endblock %} | fastagram</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% stylesheet 'style' %}
 </head>
 <body>
 
