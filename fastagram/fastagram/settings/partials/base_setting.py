@@ -11,21 +11,29 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import raven
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(
+    os.path.dirname(
+        os.path.dirname(
+            os.path.dirname(os.path.abspath(__file__))
+        )
+    )
+)
 PROJECT_DIR = os.path.dirname(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&pr3vldi(aa==ci3a2@+^6oh4^jh#$&va50e7bg#*fjrs!spw8'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get('SECRET_KEY_DJANGO')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*',
+]
 
 
 # Application definition
@@ -37,9 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'django_extensions',
-    'debug_toolbar',
 
     'users',
     'fastagram',
@@ -79,17 +84,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'fastagram.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
@@ -122,19 +116,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_URL = '/login/'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'dist', 'static')
-MEDIA_ROOT = os.path.join(PROJECT_DIR, 'dist', 'media')
-
-STATICFILES_DIRS = [
-    # os.path.join(PROJECT_DIR, 'dist', 'static'),
-]
-# custome auth
-AUTH_USER_MODEL = 'users.user'
+RAVEN_CONFIG = {
+    'dsn': 'https://db63343960c84fe0851b9167e95b95b3:d1f369f174774676a11363b42976a6e3@app.getsentry.com/72480',
+}
