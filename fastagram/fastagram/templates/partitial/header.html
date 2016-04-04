@@ -1,15 +1,29 @@
-<header id="header">
-  <h1>this is header</h1>
-  <ul>
-    <li><a href="{% url 'home' %}">home</a></li>
-    <li><a href="{% url 'post_list' %}">post</a></li>
-    {% if request.user.is_authenticated %}
-    <li><a href="{% url 'logout' %}">logout</a></li>
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+    <ul class="right hide-on-med-and-down">
+        <li><a href="{% url 'home' %}">home</a></li>
+        <li><a href="{% url 'post_list' %}">post</a></li>
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">logout</a></li>
 
-    {% else %}
-    <li><a href="{% url 'login' %}">login</a></li>
-    <li><a href="{% url 'signup' %}">signup</a></li>
+        {% else %}
+        <li><a href="{% url 'login' %}">login</a></li>
+        <li><a href="{% url 'signup' %}">signup</a></li>
 
-    {% endif %}
-  </ul>
-</header>
+        {% endif %}
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="{% url 'home' %}">home</a></li>
+        <li><a href="{% url 'post_list' %}">post</a></li>
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">logout</a></li>
+        {% else %}
+        <li><a href="{% url 'login' %}">login</a></li>
+        <li><a href="{% url 'signup' %}">signup</a></li>
+        {% endif %}
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
