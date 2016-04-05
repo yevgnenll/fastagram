@@ -9,11 +9,10 @@
 
         check_pw.keyup(function(){
             if (my_pass.val() === check_pw.val()) {
-                chk_label.text('correct password');                
+                chk_label.text('correct password').css('font-size', '20px').css('color', '#4CAF50');                
                 signup.prop('disabled', false);
             } else {
-                chk_label.text('invalid password').css('font-size', '20px').css('color','#ff1744');
-
+                chk_label.text('invalid password').css('font-size', '20px').css('color','#b71c1c');
                 signup.prop('disabled', true);
             }
         });
