@@ -14,16 +14,20 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "fastagram", "static"),
 # ]
-
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'pipeline.finders.PipelineFinder',
 )
 
-
 PIPELINE = {
     'STYLESHEETS': {
+        'vendor': {
+            'source_filenames': (
+              'css/vendor/*.css',
+            ),
+            'output_filename': 'css/vendor/vendor.css',
+        },
         'style': {
             'source_filenames': (
               'css/*.css',
@@ -32,6 +36,12 @@ PIPELINE = {
         },
     },
     'JAVASCRIPT': {
+        'vendor': {
+            'source_filenames': (
+              'js/vendor/*.js',
+            ),
+            'output_filename': 'js/vendor/vendor.js',
+        },
         'fastagram': {
             'source_filenames': (
               'js/*.js',
@@ -44,3 +54,5 @@ PIPELINE = {
 
 # PIPELINE['CSS_COMPRESSOR'] = 'pipeline.compressors.yuglify.YuglifyCompressor'
 # PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.yuglify.YuglifyCompressor'
+PIPELINE['CSS_COMPRESSOR'] = 'pipeline.compressors.NoopCompressor'
+PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.NoopCompressor'

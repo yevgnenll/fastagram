@@ -8,17 +8,23 @@
 
   <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% stylesheet "vendor" %}
     {% stylesheet "style" %}
 </head>
 <body>
-    {% include "partitial/header.html" %} 
+    {% include "partitial/header.html" %}
+    
 
-    {% block content %}
-    {% endblock %}
-  
+    <main>    
+        {% block content %}
+        {% endblock %}
+    </main>
+
+
     {% include "partitial/footer.html" %}
-    <!--  Scripts-->
+    {# script #}
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    {% javascript "vendor" %}
     {% javascript "fastagram" %}
   </body>
 </html>
