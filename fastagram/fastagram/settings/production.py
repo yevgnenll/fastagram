@@ -1,13 +1,23 @@
 from .partials import *
+
+import raven
+
 import os
 
 
 DEBUG = False
 
+ALLOWED_HOSTS = [
+    "*",
+]
+
 INSTALLED_APPS += [
     'raven.contrib.django.raven_compat',
 ]
 
+RAVEN_CONFIG = {
+    'dsn': 'https://db63343960c84fe0851b9167e95b95b3:d1f369f174774676a11363b42976a6e3@app.getsentry.com/72480',
+}
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 

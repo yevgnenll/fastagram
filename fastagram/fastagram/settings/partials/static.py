@@ -1,5 +1,6 @@
 import os
-from .base_setting import PROJECT_DIR, BASE_DIR
+
+from .base_setting import PROJECT_DIR
 
 
 STATIC_URL = '/static/'
@@ -10,9 +11,9 @@ MEDIA_ROOT = os.path.join(PROJECT_DIR, "dist", "media")
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "fastagram", "static"),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "fastagram", "static"),
+# ]
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -22,7 +23,6 @@ STATICFILES_FINDERS = (
 
 
 PIPELINE = {
-    'PIPELINE_ENABLED': True,
     'STYLESHEETS': {
         'style': {
             'source_filenames': (
@@ -42,5 +42,5 @@ PIPELINE = {
 }
 
 
-PIPELINE['CSS_COMPRESSOR'] = 'pipeline.compressors.yuglify.YuglifyCompressor'
-PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.yuglify.YuglifyCompressor'
+# PIPELINE['CSS_COMPRESSOR'] = 'pipeline.compressors.yuglify.YuglifyCompressor'
+# PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.yuglify.YuglifyCompressor'
