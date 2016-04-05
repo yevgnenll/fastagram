@@ -1,32 +1,29 @@
 (function(){
 
-    var is_check = false;
+    var is_check = true;
 
     $(document).ready(function(){
         var my_pass = $('#firstpw');
-
         var check_pw = $('#secondpw');
+        var chk_label = $('#checked');
+
         check_pw.keyup(function(){
             if (my_pass.val() === check_pw.val()) {
-                $('#checked').text('correct password').css('font-size', '20px');
-                is_check = true;
+                chk_label.text('correct password').removeClass('check_user_data');
+                is_check = false; 
             } else {
-                $('#checked').text('invalid password').css('font-size', '20px');
-                is_check = false;
+                chk_label.text('invalid password').addClass('check_user_data');
+                is_check = true;
             }
         });
     });
+
     $(document).ready(function(){
-    
-
         $('#signup').click(function(){
-
-            if(is_check===false){
-                alert("password isn't true");
-                return false;
+            if(is_check){
+                $('#signup').disabled = true;
             }
         });
         
     });
-
 })();
