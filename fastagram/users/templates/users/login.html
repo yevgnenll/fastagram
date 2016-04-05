@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section>
+<section class="container">
   <h1>welcome login</h1>
   <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
@@ -11,7 +11,4 @@
   </form>
 </section>
 
-
-
 {% endblock %}
- 
