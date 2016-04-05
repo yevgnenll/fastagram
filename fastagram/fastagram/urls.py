@@ -41,3 +41,4 @@ urlpatterns = [
     url(r'^(?P<slug>\w+)/$', UserProfileView.as_view(), name="profile"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

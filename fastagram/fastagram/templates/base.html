@@ -1,20 +1,26 @@
-{% load staticfiles %}
+{% load pipeline %}
 <!DOCTYPE html>
-<html lang="ko-KR">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>{% block title %} {% endblock %} | fastagram</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>{% block title %}{% endblock %}</title>
+
+  <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% stylesheet "style" %}
 </head>
 <body>
+    {% include "partitial/header.html" %} 
 
-  {% include "partitial/header.html" %}
-
-  <section id="content">
     {% block content %}
     {% endblock %}
-  </section>
-
-  {% include "partitial/footer.html" %}
-</body>
+  
+    {% include "partitial/footer.html" %}
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    {% javascript "fastagram" %}
+  </body>
 </html>
+
+
