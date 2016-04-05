@@ -8,3 +8,10 @@
 li {
     list-style-type: none;
 }
+
+.min-height {
+    min-height: 67vh;
+}
+.authform {
+    padding-top: 5vh;
+}
