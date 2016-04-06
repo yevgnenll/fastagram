@@ -20,6 +20,7 @@
               <span class="card-title">{{ post.user }}</span>
             </div>
             <div class="card-content">
+                <span class="card-title">{{ post.user }} like: {{ post.like_user_set.count }}</span>
                 <p>{{ post.content | hash_html | safe }}</p>
                 {% for tag in post.tag_set.all %}
                     <div class="chip a-font-color">
@@ -30,10 +31,12 @@
             </div>
             <div class="card-action">
               <a href="#">{{ post.user }}</a>
-                <a href="">
-                    <i class="material-icons thumb_color">thumb_up</i> 
-                </a>
-
+                <form action="{% url 'like' post.hash_id %}" method="post">
+                    <button type="submit" class="waves-effect waves-light btn">
+                        <i class="material-icons thumb_color">thumb_up</i> 
+                    </button>
+                    {% csrf_token %}
+                </form>
             </div>
           </div>
         </div>
