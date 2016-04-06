@@ -1,15 +1,35 @@
 {% extends "base.html" %}
 
+{% load hash_html %}
+
 {% block title %}
 {{ tag.name }}
 {% endblock %}
 
 {% block content %}
 
-  <ul>
-    {% for post in tag.post_set.all %}
-    <li>{{ post.content }}</li>
-    {% endfor %}
-  </ul>
-{% endblock %}
+<section class="container min-height">
+    <h1 class="header center orange-text">{{ tag.name }}</h1>
+    <div class="row">
+     {% for post in tag.post_set.all %}
+        <div class="col offset-s2 offset-m2 offset-l2 s8 m8 l8">
+          <div class="card large">
+            <div class="card-image post-list-card">
+                <a href="{% url 'post' post.hash_id %}">
+                    <img src="{{ post.image.url }}" alt="{{ post.image }}">
+                </a>
+              <span class="card-title">{{ post.user }}</span>
+            </div>
+            <div class="card-content">
+          <p>{{ post.content | hash_html | safe }}</p>
+            </div>
+            <div class="card-action">
+              <a href="#">{{ post.user }}</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
 
+</section>
+{% endblock %}

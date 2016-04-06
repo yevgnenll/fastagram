@@ -38,7 +38,8 @@ PIPELINE = {
     'JAVASCRIPT': {
         'vendor': {
             'source_filenames': (
-              'js/vendor/*.js',
+                'js/vendor/jquery-2.2.3.min.js',
+                'js/vendor/materialize.js',
             ),
             'output_filename': 'js/vendor/vendor.js',
         },
@@ -54,5 +55,6 @@ PIPELINE = {
 
 # PIPELINE['CSS_COMPRESSOR'] = 'pipeline.compressors.yuglify.YuglifyCompressor'
 # PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.yuglify.YuglifyCompressor'
-PIPELINE['CSS_COMPRESSOR'] = 'pipeline.compressors.NoopCompressor'
-PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.NoopCompressor'
+# PIPELINE['CSS_COMPRESSOR'] = 'pipeline.compressors.NoopCompressor'
+# PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.NoopCompressor'
+PIPELINE['COMPILERS'] = ('pipeline.compilers.sass.SASSCompiler',)

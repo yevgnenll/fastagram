@@ -13,9 +13,19 @@ li {
 .authform {
     padding-top: 5vh;
 }
-.check_user_data{
-    font-size: 20px;
-    color: #ff1744;
+.ptop7vh{
+    padding-top: 5vh;
 }
-.disabled_func {
+.fixed-action-btn {
+    bottom: 100px;
+    right: 70px;
+}
+.large {
+    height: 600px;
+}
+.card-image {
+    max-height: 70%;
+}
+.chip > .a-font-color{
+    color: #039be5;
 }

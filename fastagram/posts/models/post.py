@@ -52,11 +52,6 @@ class Post(models.Model):
         verbose_name = "포스트"
         verbose_name_plural = verbose_name
 
-    @property
-    def tags_to_href(self):
-        ret_val = wrrap_link_node(self.content)
-        return ret_val
-
     def make_hash_id(self):
 
         from fastagram.utils import make_hash

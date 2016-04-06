@@ -1,26 +1,87 @@
 {% extends "base.html" %}
+{% load hash_html %}
 
 {% block title %}
   post list
 {% endblock %}
 
 {% block content %}
+{# post list #}
+<section class="container min-height">
+    <h1 class="header center orange-text">friends interesting</h1>
+    <div class="row">
+     {% for post in object_list %}
+        <div class="col offset-s2 offset-m2 offset-l2 s8 m8 l8">
+          <div class="card large">
+            <div class="card-image post-list-card">
+                <a href="{% url 'post' post.hash_id %}">
+                    <img src="{{ post.image.url }}" alt="{{ post.image }}">
+                </a>
+              <span class="card-title">{{ post.user }}</span>
+            </div>
+            <div class="card-content">
+                <p>{{ post.content | hash_html | safe }}</p>
+                {% for tag in post.tag_set.all %}
+                    <div class="chip a-font-color">
+                        <a href="{% url 'tag-detail' tag.name %}">{{ tag.tag_name }}</a>
+                    </div>
+                {% endfor %}
 
-<h1>post list</h1>
-    <ul>
-    {% for post in object_list %}
-    {% if post.image %}
-        <li><img src="{{ post.image.url }}" width=200 height=200  alt=""></li>
-    {% endif %}
-        <li><a href="{% url 'post' post.hash_id %}">{{ post.content }}</a></li>
-    {% endfor %}
-    </ul>
+            </div>
+            <div class="card-action">
+              <a href="#">{{ post.user }}</a>
+                <a href="">
+                    <i class="material-icons thumb_color">thumb_up</i> 
+                </a>
 
-    <form action="{% url 'write' %}" method="post" enctype="multipart/form-data">
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+</section>
+    {# write button #}
+    <div class="fixed-action-btn" >
+        <a href="#write_post" class="modal-trigger btn-floating btn-large red">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
+    {# modal popup for writing post #}
+    <div id="write_post" class="modal">
+        <form action="{% url 'write' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <li><textarea name="content" cols="30" rows="10"></textarea></li>
-        <li><input type="file" name="image" required></li>
-        <li><input type="submit"></li>
-    </form>
+        <div class="modal-content">
+        <h4>write post</h4>
+            {# content input #}
+            <div class="row">
+                <div class="input-field col s12 m12 l12">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <textarea name="content" rows="10" class="materialize-textarea"></textarea>
+                    <label>content</label>
+                </div>
+            </div>
+            {# image btn #}
+            <div class="row">
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>image</span>
+                        <input type="file" name="image" required value="" >
+                    </div>
+                    {# image path #}
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+            </div>
+            {# submit button #}
+            <div class="modal-footer">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 
 {% endblock %}
