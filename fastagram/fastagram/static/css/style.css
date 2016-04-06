@@ -16,3 +16,16 @@ li {
 .ptop7vh{
     padding-top: 5vh;
 }
+.card_image > img {
+
+}
+.fixed-action-btn {
+    bottom: 100px;
+    right: 70px;
+}
+.large {
+    height: 600px;
+}
+.card-image {
+    max-height: 70%;
+}

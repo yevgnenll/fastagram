@@ -1,47 +1,84 @@
 {% extends "base.html" %}
+{% load hash_html %}
+{% load shrink_content %}
+
 
 {% block title %}
   {{ post.title }}
 {% endblock %}
 
 {% block content %}
+<section class="container min-height">
+    <h1 class="header center orange-text">friends interesting</h1>
+    <div class="col offset-s2 offset-m2 offset-l2 s8 m8 l8">
+        <div class="card large">
+            <div class="card-image waves-effect waves-block waves-light">
+            {% if post.image %}
+                <img class="activator" src="{{ post.image.url }}">
+            {% endif %}
+            </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">
+                    {{ post.user }}
+                        {% for tag in post.tag_set.all %}
+                            <div class="chip">
+                                <a href="{% url 'tag-detail' tag.name %}">{{ tag.tag_name }}</a>
+                            </div>
+                        {% endfor %}
 
-    <p>{{ post.user.username }}</p>
-    <p>{{ post.content }}</p>
-    <p>this is test</p>
-    <p>{{ post.tags_to_href | safe }}</p>
-    <p>{{ post.created_at }}</p>
-    <p>{{ post.updated_at }}</p>
-    {% if post.image %}
-       <img src="{{ post.image.url }}" width=200 height=200  alt="">>
-    {% endif %}
+                    <i class="material-icons right">more_vert</i>
+                </span>
+                <p>{{ post.content | hash_html | safe }}</p>
+            </div>
+            <div class="card-reveal">
+                <p>{{ post.content | hash_html | safe }}</p>
+            </div>
+        </div> 
+    </div>
+</section>
+<section class="container">
+    <div class="fixed-action-btn" >
+            <a href="#write_comment" class="modal-trigger btn-floating btn-large red">
+                <i class="large material-icons">add</i>
+            </a>
+        </div>
+        {# modal popup for writing post #}
+        <div id="write_comment" class="modal">
+            <form action="{% url 'comment' post.hash_id %}" method="post">
+            {% csrf_token %}
+            <div class="modal-content">
+            <h4>write comment</h4>
+                {# content input #}
+                <div class="row">
+                    <div class="input-field col s12 m12 l12">
+                        <i class="material-icons prefix">mode_edit</i>
+                        <input name="content">
+                        <label>content</label>
+                    </div>
+                </div>
+                {# submit button #}
+                <div class="modal-footer">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
-
-  <h1>tags</h1>
-  {% for tag in post.tag_set.all %}
-    <li><a href="{% url 'tag-detail' tag.name %}">{{ tag.tag_name }}</a> </li>
-  {% endfor %}
-
- <form action="{% url 'tag-create' post.hash_id %}" method="post">
-      <input type="text" name="name" placeholder="tag name">
-      <input type="submit" value="submit">
-      {% csrf_token %}
-  </form>
-    
-  
-  <ul>
-    {% for comment in post.comment_set.all %}
-    <li>{{ comment.content }}</li>
-    {% endfor %}
-  </ul>
-
- <p>comment insert</p>
-
-  <form action="{% url 'comment' post.hash_id %}" method="post">
-    <input type="text" name="content">
-    <input type="submit" value="submit">
-    {% csrf_token %}
-  </form>
-
-
+<section class="container">
+    <h1 class="header center orange-text">friends comments</h1>
+    <ul class="collapsible" data-collapsible="accordion">
+        {% for comment in post.comment_set.all %}
+            <li>
+                <div class="collapsible-header">
+                    <i class="material-icons">filter_drama</i>
+                        {{ comment.user }} | {{ comment.content | shrink_content }}
+                </div>
+                <div class="collapsible-body"><p>{{ comment.content }}</p></div>
+            </li>
+        {% endfor %}
+    </ul>
+</section>
 {% endblock %}
