@@ -18,7 +18,9 @@ from django.contrib import admin
 
 from users.views import LoginView, UserProfileView
 from fastagram.views import HomePage
-from posts.views import PostListView, PostDetailView, WritePostView, AddCommentView, TagCreateView, TagPostDetailView
+from posts.views import PostListView, PostDetailView, \
+    WritePostView, AddCommentView, TagCreateView, TagPostDetailView, \
+    PostLikeView
 from users.views import AuthSignupView, logout_user
 
 from django.conf import settings
@@ -34,6 +36,7 @@ urlpatterns = [
     url(r'^posts/write/$', WritePostView.as_view(), name="write"),
     url(r'^tags/(?P<slug>\w+)/$', TagPostDetailView.as_view(), name="tag-detail"),
     url(r'^posts/(?P<slug>\w+)/tags/$', TagCreateView.as_view(), name="tag-create"),
+    url(r'^posts/(?P<slug>\w+)/like/$', PostLikeView.as_view(), name="like"),
     url(r'^posts/(?P<slug>\w+)/comment/$', AddCommentView.as_view(), name="comment"),
     url(r'^posts/(?P<slug>\w+)/$', PostDetailView.as_view(), name="post"),
     url(r'^signup/$', AuthSignupView.as_view(), name="signup"),
@@ -41,4 +44,3 @@ urlpatterns = [
     url(r'^(?P<slug>\w+)/$', UserProfileView.as_view(), name="profile"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-# static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
