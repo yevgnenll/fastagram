@@ -16,9 +16,6 @@ li {
 .ptop7vh{
     padding-top: 5vh;
 }
-.card_image > img {
-
-}
 .fixed-action-btn {
     bottom: 100px;
     right: 70px;
@@ -28,4 +25,7 @@ li {
 }
 .card-image {
     max-height: 70%;
+}
+.chip > .a-font-color{
+    color: #039be5;
 }

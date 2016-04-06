@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+{# post list #}
 <section class="container min-height">
     <h1 class="header center orange-text">friends interesting</h1>
     <div class="row">
@@ -21,7 +22,7 @@
             <div class="card-content">
                 <p>{{ post.content | hash_html | safe }}</p>
                 {% for tag in post.tag_set.all %}
-                    <div class="chip">
+                    <div class="chip a-font-color">
                         <a href="{% url 'tag-detail' tag.name %}">{{ tag.tag_name }}</a>
                     </div>
                 {% endfor %}
@@ -29,6 +30,10 @@
             </div>
             <div class="card-action">
               <a href="#">{{ post.user }}</a>
+                <a href="">
+                    <i class="material-icons thumb_color">thumb_up</i> 
+                </a>
+
             </div>
           </div>
         </div>

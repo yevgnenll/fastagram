@@ -57,3 +57,4 @@ PIPELINE = {
 # PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.yuglify.YuglifyCompressor'
 # PIPELINE['CSS_COMPRESSOR'] = 'pipeline.compressors.NoopCompressor'
 # PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.NoopCompressor'
+PIPELINE['COMPILERS'] = ('pipeline.compilers.sass.SASSCompiler',)
